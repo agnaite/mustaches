@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>👨🏻</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav nav-bar"><h3>IP Addresses</h3></div><br/>
+    <div class="content-placeholder"></div>
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+
+<script id="ip-address-template" type="text/x-handlebars-template">
+  <div class="row">
+    {{#each data}}
+      <span class="col-sm-3"><mark>{{ first_name }}:</mark> [{{ ip_address }}]</span>
+    {{/each}}
+  </div>
+</script>
+
+<script type="text/javascript">
+  $(function () {
+    function callBack(results) { 
+  
+      // Grab the template script
+      var theTemplateScript = $("#ip-address-template").html();
+      
+      // Compile the template
+      var theTemplate = Handlebars.compile(theTemplateScript);
+
+      // Pass our data to the template
+      var theCompiledHtml = theTemplate({data: results});
+
+      // Add the compiled html to the page
+      $('.content-placeholder').html(theCompiledHtml);
+    }
+    // Get data from JSON
+    $.getJSON("MOCK_DATA.json", callBack);
+  
+  });
+
+</script>
+</body>
+</html>
